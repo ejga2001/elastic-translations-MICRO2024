@@ -46,9 +46,9 @@ for benchmark in ${BENCHMARKS}; do
 	fi
 
 	# Total VM memory
-	export MEM_GB=200
+	export MEM_GB=6
 	# VM memory backed by HugeTLB
-	export GUEST_HTLB_MEM_GB=180
+	export GUEST_HTLB_MEM_GB=4
 
 	# FIXME: move these to a common source-able file
 	pgsz=$(getconf PAGESIZE)

@@ -35,6 +35,7 @@ ok "Running pflat 4KiB..."
 pflat $(( 100 << 30 )) 1 1 false true 100000 false
 pflat.sh show
 pflat.sh clear
+exit
 
 # 64KiB ET faults
 ok "Running pflat 64KiB ET..."
@@ -48,6 +49,7 @@ ok "Running pflat 2MiB..."
 pflat $(( 100 << 30 )) 1 1 true true 100000 false
 pflat.sh show
 pflat.sh clear
+exit
 
 # 32MiB ET faults
 ok "Running pflat 32MiB ET..."

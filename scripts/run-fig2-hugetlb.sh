@@ -53,7 +53,7 @@ if [ "${TYPE}" == "vm" ]; then
 	exit 0
 fi
 
-sizes="pte hptec thp hpmd hpmdc hpud"
+sizes="pte hptec hpmd hpmdc" # hpud
 for sz in ${sizes}; do
 	clear_htlb.sh
 
@@ -63,7 +63,7 @@ for sz in ${sizes}; do
 
 	# run.sh is the main bash script which drives the artifact evaluation. It's
 	# configured via environmental varibles, documented in run.sh
-	#run.sh # native run
+	run.sh # native run
 
 	# We use a separate script for the virtualized results
 	$(dirname ${0})/run-fig2-vm.sh

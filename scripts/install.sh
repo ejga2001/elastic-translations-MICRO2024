@@ -27,13 +27,12 @@ install_kernel() {
 	ok "Installing kernel modules..."
 	make modules_install
 
-	ok "Configuring GRUB..."
-	cat <<EOF >/etc/default/grub.d/99-artifact.cfg
-GRUB_CMDLINE_LINUX="console=ttyAMA0 console=ttyS1 console=tty1 earlycon mitigations=off earlyprintk=serial no_hash_pointers ignore_loglevel"
-GRUB_TIMEOUT=5
-GRUB_TIMEOUT_STYLE=menu
-GRUB_TERMINAL=console
-EOF
+	ok "Installing kernel..."
+	sed -i.bak -E "s/^kernel=.*\\.img/kernel=kernel_${KERNEL}.img/" /boot/firmware/config.txt
+	sudo cp arch/arm64/boot/Image.gz /boot/firmware/kernel_${KERNEL}.img
+  sudo cp arch/arm64/boot/dts/broadcom/*.dtb /boot/firmware/
+  sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
+  sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
 
 	ok "Installing the kernel image..."
 	make install

@@ -100,12 +100,12 @@ for benchmark in ${BENCHMARKS}; do
 	export benchmark
 
 	# Total VM memory
-	export MEM_GB=200
+	export MEM_GB=6
 	case "${RUN}" in
 		"baseline")
 			# Baseline
 			unset MODE
-			spawnvm.sh run-fig10-virt.sh
+			KERNEL="5.18.19-vanilla+" spawnvm.sh run-fig10-virt.sh
 			;;
 		"et")
 			# ET (requires -et kernel on the host)

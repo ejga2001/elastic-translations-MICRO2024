@@ -54,7 +54,7 @@ build_kernel() {
 	ok "Building ${KERNEL} kernel..."
 	make olddefconfig
 	make prepare
-	make -j$(nproc) Image.gz modules
+	make -j$(nproc) Image.gz modules dtbs
 
 	ok "Building perf..."
 	make -j$(nproc) -C tools/perf
