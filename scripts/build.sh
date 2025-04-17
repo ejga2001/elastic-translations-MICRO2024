@@ -72,7 +72,7 @@ build_qemu() {
 		--enable-slirp --enable-numa  --enable-multiprocess --enable-membarrier \
 		--enable-linux-aio --target-list=aarch64-softmmu --enable-kvm --enable-attr \
 		--enable-vhost-vsock --enable-vhost-scsi --enable-tools --enable-cap-ng \
-		--extra-cflags="-Wno-error=dangling-pointer"
+		--disable-werror
 	make -j$(nproc)
 	popd
 
