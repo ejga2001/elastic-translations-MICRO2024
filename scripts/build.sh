@@ -57,7 +57,7 @@ build_kernel() {
 	make -j$(nproc) Image.gz modules dtbs
 
 	ok "Building perf..."
-	make -j$(nproc) -C tools/perf
+	make -j$(nproc) -C tools/perf WERROR=0
 
 	popd
 }
