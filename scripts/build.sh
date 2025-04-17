@@ -71,7 +71,8 @@ build_qemu() {
 		--enable-pie --enable-zstd --enable-virtfs --enable-vhost-net --enable-vhost-kernel \
 		--enable-slirp --enable-numa  --enable-multiprocess --enable-membarrier \
 		--enable-linux-aio --target-list=aarch64-softmmu --enable-kvm --enable-attr \
-		--enable-vhost-vsock --enable-vhost-scsi --enable-tools --enable-cap-ng
+		--enable-vhost-vsock --enable-vhost-scsi --enable-tools --enable-cap-ng \
+		--disable-werror
 	make -j$(nproc)
 	popd
 
