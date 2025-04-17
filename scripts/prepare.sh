@@ -13,7 +13,7 @@ install_packages() {
 	apt -y full-upgrade --assume-yes
 	apt -y install --assume-yes build-essential bison flex screen tmux \
 		ripgrep libncurses-dev libssl-dev libelf-dev libunwind-dev strace \
-		ltrace inotify-tools numactl git vim libnuma-dev libzstd-dev ninja-build \
+		inotify-tools numactl git vim libnuma-dev libzstd-dev ninja-build \
 		libaio-dev pkg-config libglib2.0-dev libpixman-1-dev libattr1-dev \
 	       	cpufrequtils libcap-ng-dev
 	apt -y purge flash-kernel
