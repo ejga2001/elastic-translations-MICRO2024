@@ -36,5 +36,5 @@ fi
 
 chmod +x $SRC_SCRIPT
 echo "Preparing small dataset. This will take a while..."
-$SRC_SCRIPT 10000 11000 100000000 > $OUT
+$SRC_SCRIPT 1000 1100 1000000 > $OUT
 echo "Dataset is ready now..."
