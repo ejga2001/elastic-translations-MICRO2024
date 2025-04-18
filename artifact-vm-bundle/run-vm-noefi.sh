@@ -2,7 +2,7 @@
 # Run a non-EFI VM which directly boots to pre-built VM kernels on the host
 
 export BASE="${BASE:-/root/elastic-translations-MICRO2024}"
-export KERNEL="${KERNEL:-5.18.19-etvm+}"
+export KERNEL="${KERNEL:-5.18.19-vanilla+}"
 source "${BASE}/env/base.env"
 
 exec numactl -N0 -m0 -- \
