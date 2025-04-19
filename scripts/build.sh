@@ -20,10 +20,14 @@ source "$(dirname ${0})/common.sh"
 build_kernel() {
 	CONFIG="./configs"
 
-	if [[ "${KERNEL}" == "mthp" ]]; then
+	if [[ "${KERNEL}" == "mthp.4k" ]]; then
 		pushd src/linux-mthp
 		ok "Building 6.8rc-mthp kernel..."
-		cp configs/* .config
+		cp configs/config.mthp.4k .config
+	elif [[ "${KERNEL}" == "mthp.64k" ]]; then
+  		pushd src/linux-mthp
+  		ok "Building 6.8rc-mthp kernel..."
+  		cp configs/config.mthp.64k .config
 	elif [[ "${KERNEL}" == "trident" ]]; then
 		pushd src/
 
