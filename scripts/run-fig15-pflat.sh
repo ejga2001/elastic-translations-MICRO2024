@@ -33,7 +33,11 @@ pushd "${BASE}"
 if [ $(uname -r) == "6.8.12-v8+" ] \
   || [ $(uname -r) == "6.8.12-v8+64k+" ]; then
   # 4KiB (for 64KiB boot a kernel with a 64KiB granule -- CONFIG_ARM64_64K_PAGES)
-  ok "Running pflat 4KiB..."
+  if [ $(uname -r) == "6.8.12-v8+" ]; then
+    ok "Running pflat 4KiB..."
+  else
+    ok "Running pflat 64KiB..."
+  fi
   pflat $(( 100 << 30 )) 1 1 false true 100000 false
   pflat.sh show
   pflat.sh clear
@@ -51,7 +55,11 @@ elif [ $(uname -r) == "5.18.19-et+pftrace+" ]; then
 elif [ $(uname -r) == "5.18.19-vanilla+pftrace+4k+" ] \
   || [ $(uname -r) == "5.18.19-vanilla+pftrace+16k+" ]; then
   # 2MiB (for 32MiB boot a kernel with a 16KiB granule -- CONFIG_ARM64_16K_PAGES)
-  ok "Running pflat 2MiB..."
+  if [ $(uname -r) == "5.18.19-vanilla+pftrace+4k+" ]; then
+    ok "Running pflat 2MiB..."
+  else
+    ok "Running pflat 32MiB..."
+  fi
   pflat $(( 100 << 30 )) 1 1 true true 100000 false
   pflat.sh show
   pflat.sh clear
