@@ -11,10 +11,14 @@ install_kernel() {
 		fail "Please run scripts/install.sh inside the VM or manually copy / install the VM kernel"
 	fi
 
-	if [[ "${KERNEL}" == "mthp" ]]; then
-		pushd src/linux-mthp
-		ok "Installing 6.8rc-mthp kernel..."
-		cp configs/* .config
+	if [[ "${KERNEL}" == "mthp.4k" ]]; then
+  		pushd src/linux-mthp
+  		ok "Building 6.8rc-mthp kernel..."
+  		cp configs/config.mthp.4k .config
+  elif [[ "${KERNEL}" == "mthp.64k" ]]; then
+      pushd src/linux-mthp
+      ok "Building 6.8rc-mthp kernel..."
+      cp configs/config.mthp.64k .config
 	elif [[ "${KERNEL}" == "trident" ]]; then
 		pushd src/trident-linux
 
