@@ -38,18 +38,18 @@ if [ $(uname -r) == "6.8.12-v8+" ] \
   else
     ok "Running pflat 64KiB..."
   fi
-  pflat $(( 100 << 30 )) 1 1 false true 100000 false
+  pflat $(( 1 << 32 )) 1 1 false true 100000 false
   pflat.sh show
   pflat.sh clear
 elif [ $(uname -r) == "5.18.19-et+pftrace+" ]; then
   # 64KiB ET faults
   ok "Running pflat 64KiB ET..."
-  MODE=etheap ETHEAP=1 prctl.sh pflat $(( 100 << 30 )) 1 1 false true 100000 false
+  MODE=etheap ETHEAP=1 prctl.sh pflat $(( 1 << 32 )) 1 1 false true 100000 false
   pflat.sh show
   pflat.sh clear
   # 32MiB ET faults
   ok "Running pflat 32MiB ET..."
-  MODE=etheap ETHEAP=1 prctl.sh prctl --ca --et -- pflat $(( 100 << 30 )) 1 1 true true 100000 false
+  MODE=etheap ETHEAP=1 prctl.sh prctl --ca --et -- pflat $(( 1 << 32 )) 1 1 true true 100000 false
   pflat.sh show
   pflat.sh clear
 elif [ $(uname -r) == "5.18.19-vanilla+pftrace+4k+" ] \
@@ -60,7 +60,7 @@ elif [ $(uname -r) == "5.18.19-vanilla+pftrace+4k+" ] \
   else
     ok "Running pflat 32MiB..."
   fi
-  pflat $(( 100 << 30 )) 1 1 true true 100000 false
+  pflat $(( 1 << 32 )) 1 1 true true 100000 false
   pflat.sh show
   pflat.sh clear
 else
