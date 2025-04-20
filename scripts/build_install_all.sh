@@ -2,7 +2,7 @@
 
 set -o pipefail -o errexit
 
-#source "$(dirname ${0})/common.sh"
+source "$(dirname ${0})/common.sh"
 
 KERNELS="vanilla vanilla.pftrace.4k vanilla.pftrace.16k et et.pftrace hwk"
 # KERNELS="vanilla vanilla.pftrace.4k vanilla.pftrace.16k et et.pftrace hwk mthp mthp.pftrace.4k mthp.pftrace.64k"
