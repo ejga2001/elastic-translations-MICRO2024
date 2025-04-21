@@ -20,14 +20,18 @@ source "$(dirname ${0})/common.sh"
 build_kernel() {
 	CONFIG="./configs"
 
-	if [[ "${KERNEL}" == "mthp.4k" ]]; then
+  if [[ "${KERNEL}" == "mthp" ]]; then
 		pushd src/linux-mthp
 		ok "Building 6.8rc-mthp kernel..."
-		cp configs/config.mthp.4k .config
-	elif [[ "${KERNEL}" == "mthp.64k" ]]; then
+		cp configs/config.mthp .config
+	elif [[ "${KERNEL}" == "mthp.pftrace.4k" ]]; then
+		pushd src/linux-mthp
+		ok "Building 6.8rc-mthp kernel..."
+		cp configs/config.mthp.pftrace.4k .config
+	elif [[ "${KERNEL}" == "mthp.pftrace.64k" ]]; then
   		pushd src/linux-mthp
   		ok "Building 6.8rc-mthp kernel..."
-  		cp configs/config.mthp.64k .config
+  		cp configs/config.mthp.pftrace.64k .config
 	elif [[ "${KERNEL}" == "trident" ]]; then
 		pushd src/
 
@@ -44,7 +48,7 @@ build_kernel() {
 		cp ${CONFIG} .config
 	else
 		pushd src/et-linux
-		
+
 		if [[ ! -z "${VM}" ]]; then
 			CONFIG="${CONFIG}/vm/config.${KERNEL}"
 		else
