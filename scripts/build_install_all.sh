@@ -13,15 +13,15 @@ build_kernel() {
 
   if [[ "${KERNEL}" == "mthp" ]]; then
 		pushd src/linux-mthp
-		ok "Building 6.8rc-mthp kernel..."
+		ok "Building 6.9rc-mthp kernel..."
 		cp configs/config.mthp .config
 	elif [[ "${KERNEL}" == "mthp.pftrace.4k" ]]; then
 		pushd src/linux-mthp
-		ok "Building 6.8rc-mthp kernel..."
+		ok "Building 6.9rc-mthp+pftrace+4k kernel..."
 		cp configs/config.mthp.pftrace.4k .config
 	elif [[ "${KERNEL}" == "mthp.pftrace.64k" ]]; then
   		pushd src/linux-mthp
-  		ok "Building 6.8rc-mthp kernel..."
+  		ok "Building 6.9rc-mthp+pftrace+64k kernel..."
   		cp configs/config.mthp.pftrace.64k .config
 	elif [[ "${KERNEL}" == "trident" ]]; then
 		pushd src/
@@ -68,16 +68,16 @@ install_kernel() {
 
 	if [[ "${KERNEL}" == "mthp" ]]; then
   		pushd src/linux-mthp
-  		ok "Installing 6.8rc-mthp kernel..."
+  		ok "Building 6.9rc-mthp kernel..."
   		cp configs/config.mthp .config
-  	elif [[ "${KERNEL}" == "mthp.pftrace.4k" ]]; then
-  		pushd src/linux-mthp
-  		ok "Installing 6.8rc-mthp kernel..."
-  		cp configs/config.mthp.pftrace.4k .config
-  	elif [[ "${KERNEL}" == "mthp.pftrace.64k" ]]; then
-    		pushd src/linux-mthp
-    		ok "Installing 6.8rc-mthp kernel..."
-    		cp configs/config.mthp.pftrace.64k .config
+  elif [[ "${KERNEL}" == "mthp.pftrace.4k" ]]; then
+    pushd src/linux-mthp
+    ok "Building 6.9rc-mthp+pftrace+4k kernel..."
+    cp configs/config.mthp.pftrace.4k .config
+  elif [[ "${KERNEL}" == "mthp.pftrace.64k" ]]; then
+      pushd src/linux-mthp
+      ok "Building 6.9rc-mthp+pftrace+64k kernel..."
+      cp configs/config.mthp.pftrace.64k .config
 	elif [[ "${KERNEL}" == "trident" ]]; then
 		pushd src/trident-linux
 

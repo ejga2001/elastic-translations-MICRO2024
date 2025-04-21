@@ -30,10 +30,10 @@ pushd "${BASE}"
 # FIXME: Create a proper CLI arg parser
 # pflag <VMA size in bytes> <nr of VMAs> <nr of threads> <THP-flag> <shuffle-flag (fault VMA randomly, not sequentially)> <nr of faults> <VMA # drop-flag (count VMA unmapping / flushing in the tracing)>
 
-if [ $(uname -r) == "6.8.12-v8+" ] \
-  || [ $(uname -r) == "6.8.12-v8+64k+" ]; then
+if [ $(uname -r) == "6.9.12-mthp+pftrace+4k+" ] \
+  || [ $(uname -r) == "6.9.12-mthp+pftrace+64k+" ]; then
   # 4KiB (for 64KiB boot a kernel with a 64KiB granule -- CONFIG_ARM64_64K_PAGES)
-  if [ $(uname -r) == "6.8.12-v8+" ]; then
+  if [ $(uname -r) == "6.9.12-mthp+pftrace+4k+" ]; then
     ok "Running pflat 4KiB..."
   else
     ok "Running pflat 64KiB..."
