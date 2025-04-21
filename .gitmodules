@@ -21,7 +21,7 @@
 [submodule "linux-mthp"]
 	path = src/linux-mthp
 	url = https://github.com/ejga2001/rpi-linux.git
-	branch = rpi-6.8.y
+	branch = rpi-6.9-mthp
 [submodule "etutils-rs"]
 	path = src/etutils-rs
 	url = https://github.com/cslab-ntua/etutils-rs.git

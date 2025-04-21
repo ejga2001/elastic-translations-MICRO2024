@@ -4,20 +4,25 @@ set -o pipefail -o errexit
 
 source "$(dirname ${0})/common.sh"
 
-KERNELS="vanilla vanilla.pftrace.4k vanilla.pftrace.16k et et.pftrace hwk"
+# KERNELS="vanilla vanilla.pftrace.4k vanilla.pftrace.16k et et.pftrace hwk"
+KERNELS="mthp mthp.pftrace.4k mthp.pftrace.64k"
 # KERNELS="vanilla vanilla.pftrace.4k vanilla.pftrace.16k et et.pftrace hwk mthp mthp.pftrace.4k mthp.pftrace.64k"
 
 build_kernel() {
 	CONFIG="./configs"
 
-	if [[ "${KERNEL}" == "mthp.4k" ]]; then
+  if [[ "${KERNEL}" == "mthp" ]]; then
 		pushd src/linux-mthp
 		ok "Building 6.8rc-mthp kernel..."
-		cp configs/config.mthp.4k .config
-	elif [[ "${KERNEL}" == "mthp.64k" ]]; then
+		cp configs/config.mthp .config
+	elif [[ "${KERNEL}" == "mthp.pftrace.4k" ]]; then
+		pushd src/linux-mthp
+		ok "Building 6.8rc-mthp kernel..."
+		cp configs/config.mthp.pftrace.4k .config
+	elif [[ "${KERNEL}" == "mthp.pftrace.64k" ]]; then
   		pushd src/linux-mthp
   		ok "Building 6.8rc-mthp kernel..."
-  		cp configs/config.mthp.64k .config
+  		cp configs/config.mthp.pftrace.64k .config
 	elif [[ "${KERNEL}" == "trident" ]]; then
 		pushd src/
 
