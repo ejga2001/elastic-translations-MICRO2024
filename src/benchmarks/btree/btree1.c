@@ -72,7 +72,7 @@
 #else
 ///< the number of elements in the tree
 //#define NELEMENTS (350UL << 20)
-#define NELEMENTS   (350UL << 14)
+#define NELEMENTS   (350UL << 16)
 ///< the number of lookups
 #define NLOOKUP 1000000UL
 //#define NLOOKUP 1000000000UL
