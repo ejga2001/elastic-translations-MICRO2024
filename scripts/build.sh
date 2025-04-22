@@ -132,7 +132,7 @@ prepare_datasets() {
 
 	pushd canneal_dataset
 	ok "Generating the canneal synthetic netlist..."
-	# FIXME: prep_canneal_dataset.sh
+	prep_canneal_dataset.sh
 	popd
 
 	pushd gabps

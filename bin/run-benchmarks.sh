@@ -731,7 +731,7 @@ done
 for i in $(seq $ITER); do
 	#run $i benchmarks "./XSBench -s XL -t 32 -l 170" xsbench submission
 	#run $i benchmarks "./XSBench -s XL -t 1 -l 450" xsbench submission
-	run $i benchmarks "./XSBench -s XL -t 1 -l 128" xsbench submission
+	run $i benchmarks "./XSBench -s large -t 1 -l 128" xsbench submission
 done
 
 for i in $(seq $ITER); do
