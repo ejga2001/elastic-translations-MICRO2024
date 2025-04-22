@@ -778,9 +778,9 @@ done
 export PREFIX="${NUMA_PREFIX} ${TASKSET_PREFIX} ${PERF_PREFIX} ${PRCTL}"
 
 for i in $(seq $ITER); do
-	DATA_PREFIX=.
+	DATA_PREFIX=../src/benchmarks/canneal-dataset
 	#[ ${TYPE} == "vm" ] && DATA_PREFIX=/root
-	run $i benchmarks "./canneal 1 15000 2000 ${DATA_PREFIX}/canneal.inp 6000" canneal submission
+	run $i benchmarks "./canneal 1 15000 2000 ${DATA_PREFIX}/canneal_small 6000" canneal submission
 done
 
 if [ ! -z ${ETHEAP} ]; then
