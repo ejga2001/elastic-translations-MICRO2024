@@ -716,7 +716,8 @@ done
 for i in $(seq $ITER); do
 	DATA_PREFIX=.
 	#[ ${TYPE} == "vm" ] && DATA_PREFIX=/root
-	run $i benchmarks "./train ${DATA_PREFIX}/kdd12" svm submission
+	#run $i benchmarks "./train ${DATA_PREFIX}/kdd12" svm submission
+	run $i benchmarks "./train -v 100 -e 0.01 ${DATA_PREFIX}/kdd12" svm submission
 done
 
 for i in $(seq $ITER); do
@@ -744,7 +745,8 @@ for i in $(seq $ITER); do
 done
 
 for i in $(seq $ITER); do
-	run $i benchmarks "./bfs -f ./fr.el -n 20" bfs submission
+	# run $i benchmarks "./bfs -f ./fr.el -n 20" bfs submission
+	run $i benchmarks "./bfs -u 23 -n 20" bfs submission
 done
 
 for i in $(seq $ITER); do
