@@ -726,7 +726,8 @@ done
 
 for i in $(seq $ITER); do
 	#run $i benchmarks "./gups 64" gups submission
-	run $i benchmarks "./gups 32" gups submission
+	#run $i benchmarks "./gups 32" gups submission
+	run $i benchmarks "./gups 1" gups submission
 done
 
 for i in $(seq $ITER); do
