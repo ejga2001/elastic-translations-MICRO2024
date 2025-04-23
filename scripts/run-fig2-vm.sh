@@ -46,9 +46,9 @@ for benchmark in ${BENCHMARKS}; do
 	fi
 
 	# Total VM memory
-	export MEM_GB=5
+	export MEM_GB=7
 	# VM memory backed by HugeTLB
-	export GUEST_HTLB_MEM_GB=4
+	export GUEST_HTLB_MEM_GB=6
 
 	# FIXME: move these to a common source-able file
 	pgsz=$(getconf PAGESIZE)
@@ -67,20 +67,20 @@ for benchmark in ${BENCHMARKS}; do
 
 	case "${PGSZ}" in
 		"hptec")
-			export HOST_HTLB_PGSIZE_KB=${hptecszkb}
+			#export HOST_HTLB_PGSIZE_KB=${hptecszkb}
 			export GUEST_HTLB_PGSIZE_KB=${hptecszkb}
 			;; 
 		"hpmd")
-			export HOST_HTLB_PGSIZE_KB=${hpmdszkb}
+			#export HOST_HTLB_PGSIZE_KB=${hpmdszkb}
 			export GUEST_HTLB_PGSIZE_KB=${hpmdszkb}
 			;; 
 		"hpmdc")
-			export HOST_HTLB_PGSIZE_KB=${hpmdcszkb}
+			#export HOST_HTLB_PGSIZE_KB=${hpmdcszkb}
 			export GUEST_HTLB_PGSIZE_KB=${hpmdcszkb}
 			;;
 		"hpud")
 			[ ! $pgszkb -eq 4 ] && fail "pagesize doesn't support PUDs"
-			export HOST_HTLB_PGSIZE_KB=${hpudszkb}
+			#export HOST_HTLB_PGSIZE_KB=${hpudszkb}
 			export GUEST_HTLB_PGSIZE_KB=${hpudszkb}
 			export hpud=1
 			;;

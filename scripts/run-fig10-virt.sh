@@ -100,7 +100,7 @@ for benchmark in ${BENCHMARKS}; do
 	export benchmark
 
 	# Total VM memory
-	export MEM_GB=5
+	export MEM_GB=7
 	case "${RUN}" in
 		"baseline")
 			# Baseline

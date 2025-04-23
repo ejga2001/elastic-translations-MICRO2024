@@ -154,7 +154,7 @@ check "echo 1000000 > /proc/sys/vm/max_map_count" "Setting max_map_count..."
 check "echo 0 > /proc/sys/kernel/randomize_va_space" "Disabling ASLR..."
 
 [ -z ${MEM} ] && MEM=90
-export MEM=6
+export MEM
 export MEMKB=$(( ${MEM} << 20 ))
 
 nr_hptec=0
@@ -748,7 +748,7 @@ done
 
 for i in $(seq $ITER); do
 	# run $i benchmarks "./bfs -f ./fr.el -n 20" bfs submission
-	run $i benchmarks "./bfs -u 22 -n 20" bfs submission
+	run $i benchmarks "./bfs -u 23 -n 20" bfs submission
 done
 
 for i in $(seq $ITER); do
