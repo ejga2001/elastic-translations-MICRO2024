@@ -718,7 +718,7 @@ for i in $(seq $ITER); do
 	#[ ${TYPE} == "vm" ] && DATA_PREFIX=/root
 	#run $i benchmarks "./train ${DATA_PREFIX}/kdd12" svm submission
 	#run $i benchmarks "./train -v 100 -e 0.01 ${DATA_PREFIX}/kdd12" svm submission
-	run $i benchmarks "./train ${DATA_PREFIX}/kdda" svm submission
+	run $i benchmarks "./train ${DATA_PREFIX}/kddb-raw-libsvm" svm submission
 done
 
 for i in $(seq $ITER); do
