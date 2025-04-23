@@ -317,7 +317,7 @@ if [ -z ${TASKSET_CORE} ]; then
 fi
 export TASKSET_PREFIX="taskset -c ${TASKSET_CORE}"
 
-export PERF_PREFIX="perf stat -o stats.txt -e ${PERF_EVENTS}"
+export PERF_PREFIX="perf stat -e ${PERF_EVENTS}"
 export PREFIX="${NUMA_PREFIX} ${PERF_PREFIX}"
 
 # OMP threads
