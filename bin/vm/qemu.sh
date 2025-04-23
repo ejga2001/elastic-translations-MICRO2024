@@ -21,7 +21,7 @@ IMAGE="${BASE}/artifact-vm-bundle/artifact.img"
 
 NODE="${NODE:-0}"
 CPUS="${CPUS:-4}"
-MEM_GB="${MEM_GB:-6}"
+MEM_GB="${MEM_GB:-7}"
 
 if [[ -n ${GUEST_HTLB_PGSIZE_KB} ]]; then
 	NR_GUEST_HTLB_PAGES=$(( (${GUEST_HTLB_MEM_GB} << 20) / ${GUEST_HTLB_PGSIZE_KB} ))

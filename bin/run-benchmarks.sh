@@ -154,7 +154,7 @@ check "echo 1000000 > /proc/sys/vm/max_map_count" "Setting max_map_count..."
 check "echo 0 > /proc/sys/kernel/randomize_va_space" "Disabling ASLR..."
 
 [ -z ${MEM} ] && MEM=90
-export MEM=4
+export MEM=6
 export MEMKB=$(( ${MEM} << 20 ))
 
 nr_hptec=0
@@ -717,7 +717,8 @@ for i in $(seq $ITER); do
 	DATA_PREFIX=.
 	#[ ${TYPE} == "vm" ] && DATA_PREFIX=/root
 	#run $i benchmarks "./train ${DATA_PREFIX}/kdd12" svm submission
-	run $i benchmarks "./train -v 100 -e 0.01 ${DATA_PREFIX}/kdd12" svm submission
+	#run $i benchmarks "./train -v 100 -e 0.01 ${DATA_PREFIX}/kdd12" svm submission
+	run $i benchmarks "./train ${DATA_PREFIX}/kdda" svm submission
 done
 
 for i in $(seq $ITER); do
