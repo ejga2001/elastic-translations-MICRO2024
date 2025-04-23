@@ -7,7 +7,7 @@
 # - MEM: Memory in GB for htlb reservation
 # - SUFFIX: suffix identifier for the results out file
 # - LD_PRELOAD: preload libraries (e.g. tcmalloc)
-# - ALLOCATORS: jemalloc, tcmalloc, tcmallog-gperf, temeraire
+# - ALLOCATORS: jemalloc, tcmalloc, tcmalloc-gperf, temeraire
 # - BENCHMARKS: specify list of benchmarks to run
 # - OMP_NUM_THREADS: Number of OpenMP threds
 # - PERF_EVENTS: list of perf events to trace
@@ -734,7 +734,7 @@ done
 for i in $(seq $ITER); do
 	#run $i benchmarks "./XSBench -s XL -t 32 -l 170" xsbench submission
 	#run $i benchmarks "./XSBench -s XL -t 1 -l 450" xsbench submission
-	run $i benchmarks "./XSBench -s large -t 1 -l 128" xsbench submission
+	run $i benchmarks "./XSBench -s small -t 1 -l 128" xsbench submission
 done
 
 for i in $(seq $ITER); do
@@ -748,7 +748,7 @@ done
 
 for i in $(seq $ITER); do
 	# run $i benchmarks "./bfs -f ./fr.el -n 20" bfs submission
-	run $i benchmarks "./bfs -u 23 -n 20" bfs submission
+	run $i benchmarks "./bfs -u 22 -n 20" bfs submission
 done
 
 for i in $(seq $ITER); do
