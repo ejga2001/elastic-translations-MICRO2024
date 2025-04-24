@@ -88,7 +88,6 @@ if [ "${TYPE}" == "vm" ]; then
 
     export MODE="hawkeye"
     run.sh
-  fi
   else
     # inside the VM we just use THP
     run.sh
