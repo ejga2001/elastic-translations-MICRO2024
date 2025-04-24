@@ -748,7 +748,7 @@ done
 
 for i in $(seq $ITER); do
 	# run $i benchmarks "./bfs -f ./fr.el -n 20" bfs submission
-	run $i benchmarks "./bfs -u 23 -n 20" bfs submission
+	run $i benchmarks "./bfs -u 22 -n 20" bfs submission
 done
 
 for i in $(seq $ITER); do
