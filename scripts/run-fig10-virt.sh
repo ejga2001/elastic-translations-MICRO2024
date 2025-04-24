@@ -114,7 +114,7 @@ for benchmark in ${BENCHMARKS}; do
 		"baseline")
 			# Baseline
 			unset MODE
-			KERNEL="5.18.19-vanilla+" spawnvm.sh run-fig10-virt.sh
+			KERNEL="5.18.19-et" spawnvm.sh run-fig10-virt.sh
 			;;
 		"et")
 			# ET (requires -et kernel on the host)
