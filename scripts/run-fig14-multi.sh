@@ -105,16 +105,16 @@ case "${RUN}" in
 	"baseline")
 		# Baseline (THP)
 		# Kernel Requirement: 5.18.19-vanilla (or -et)
-		TASKSET_CORE=3 BENCHMARKS="xsbench" run.sh &
-		TASKSET_CORE=13 BENCHMARKS="hashjoin" run.sh &
+		TASKSET_CORE=0 BENCHMARKS="xsbench" run.sh &
+		TASKSET_CORE=1 BENCHMARKS="hashjoin" run.sh &
 		wait
 		;;
 	"et")
 		# ET
 		# Kernel Requirement: 5.18.19-et kernel
 		# KERNEL="et" ./scripts/build.sh
-		TASKSET_CORE=3 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="xsbench" run.sh &
-		TASKSET_CORE=13 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="hashjoin" run.sh &
+		TASKSET_CORE=0 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="xsbench" run.sh &
+		TASKSET_CORE=1 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="hashjoin" run.sh &
 		wait
 		;;
 esac
@@ -124,18 +124,18 @@ case "${RUN}" in
 	"baseline")
 		# Baseline (THP)
 		# Kernel Requirement: 5.18.19-vanilla (or -et)
-		TASKSET_CORE=3 BENCHMARKS="astar" run.sh &
-		TASKSET_CORE=13 BENCHMARKS="btree" run.sh &
-		TASKSET_CORE=23 BENCHMARKS="gups" run.sh &
+		TASKSET_CORE=0 BENCHMARKS="astar" run.sh &
+		TASKSET_CORE=1 BENCHMARKS="btree" run.sh &
+		TASKSET_CORE=2 BENCHMARKS="gups" run.sh &
 		wait
 		;;
 	"et")
 		# ET
 		# Kernel Requirement: 5.18.19-et kernel
 		# KERNEL="et" ./scripts/build.sh
-		TASKSET_CORE=3 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="astar" run.sh &
-		TASKSET_CORE=13 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="btree" run.sh &
-		TASKSET_CORE=23 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="gups" run.sh &
+		TASKSET_CORE=0 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="astar" run.sh &
+		TASKSET_CORE=1 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="btree" run.sh &
+		TASKSET_CORE=2 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="gups" run.sh &
 		wait
 		;;
 esac
@@ -145,20 +145,20 @@ case "${RUN}" in
 	"baseline")
 		# Baseline (THP)
 		# Kernel Requirement: 5.18.19-vanilla (or -et)
-		TASKSET_CORE=3 BENCHMARKS="omnetpp" run.sh &
-		TASKSET_CORE=13 BENCHMARKS="svm" run.sh &
-		TASKSET_CORE=23 BENCHMARKS="bfs" run.sh &
-		TASKSET_CORE=33 BENCHMARKS="gups" run.sh &
+		TASKSET_CORE=0 BENCHMARKS="omnetpp" run.sh &
+		TASKSET_CORE=1 BENCHMARKS="svm" run.sh &
+		TASKSET_CORE=2 BENCHMARKS="bfs" run.sh &
+		TASKSET_CORE=3 BENCHMARKS="gups" run.sh &
 		wait
 		;;
 	"et")
 		# ET
 		# Kernel Requirement: 5.18.19-et kernel
 		# KERNEL="et" ./scripts/build.sh
-		TASKSET_CORE=3 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="omnetpp" run.sh &
-		TASKSET_CORE=13 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="svm" run.sh &
-		TASKSET_CORE=23 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="bfs" run.sh &
-		TASKSET_CORE=33 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="gups" run.sh &
+		TASKSET_CORE=0 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="omnetpp" run.sh &
+		TASKSET_CORE=1 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="svm" run.sh &
+		TASKSET_CORE=2 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="bfs" run.sh &
+		TASKSET_CORE=3 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="gups" run.sh &
 		wait
 		;;
 esac
