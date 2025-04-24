@@ -73,7 +73,7 @@ cleanup() {
 
 	echo "Cleaning up before exiting..."
 	if [[ ${TYPE} == "host" ]]; then
-		check "set_cpufreq 1000MHz 3GHz performance" "Restoring cpufreq..."
+		check "set_cpufreq 1500MHz 2.4GHz performance" "Restoring cpufreq..."
 	fi
 	check "echo 0 > /proc/sys/vm/overcommit_memory" "Restoring overcommit..."
 	unset LD_PRELOAD
@@ -146,7 +146,7 @@ mkdir -p ${RESULTS}
 trap cleanup EXIT
 
 if [[ ${TYPE} == "host" ]]; then
-	check "set_cpufreq 2.7GHz 2.7GHz userspace" "Setting cpufreq..."
+	check "set_cpufreq 2.4GHz 2.4GHz userspace" "Setting cpufreq..."
 fi
 
 check "echo 1 > /proc/sys/vm/overcommit_memory" "Setting overcommit..."

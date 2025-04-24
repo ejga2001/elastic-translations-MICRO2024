@@ -22,7 +22,7 @@ trap cleanup EXIT
 # Env var config for run-benchmarks.sh
 export NODE=${NODE:-0}
 export TASKSET_CORE=${TASKSET_CORE:-0}
-export MEM=${MEM:-6}
+export MEM=${MEM:-7}
 export OMP_NUM_THREADS=${OMP_NUM_THREADS:-1}
 export MALLOC=${MALLOC:-tcmalloc-norelease}
 export BENCHMARKS="${BENCHMARKS:-submission}"

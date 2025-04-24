@@ -82,7 +82,17 @@ if [ "${TYPE}" == "vm" ]; then
 		export UNHINTED_FAULTS=1
 		export MODE="etonline"
 		run.sh
-	fi
+	elif [[ ! -z "${MODE}" && "${MODE}" == "hwk" ]]; then
+    # inside the VM we use HawkEye
+    unset MODE
+
+    export MODE="hawkeye"
+    run.sh
+  fi
+  else
+    # inside the VM we just use THP
+    run.sh
+  fi
 	exit 0
 fi
 
