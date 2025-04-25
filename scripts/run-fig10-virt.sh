@@ -96,7 +96,7 @@ if [ "${TYPE}" == "vm" ]; then
 fi
 
 # Define the workloads to run
-export BENCHMARKS="astar omnetpp streamcluster hashjoin svm canneal xsbench bfs gups btree"
+[ -z "${BENCHMARKS}" ] && export BENCHMARKS="astar omnetpp streamcluster hashjoin svm canneal xsbench bfs gups btree"
 
 # These are normally set by run.sh for the native results, so make sure we use
 # tcmalloc for Qemu / host as well
@@ -114,8 +114,17 @@ for benchmark in ${BENCHMARKS}; do
 		"baseline")
 			# Baseline
 			unset MODE
+			export PGSZ="pte"
+			echo "Disabling THP..."
+      export HOST_THP=never
+      export GUEST_THP=never
 			KERNEL="5.18.19-et" spawnvm.sh run-fig10-virt.sh
 			;;
+	  "thp")
+      # THP
+      unset MODE
+      KERNEL="5.18.19-et" spawnvm.sh run-fig10-virt.sh
+      ;;
 		"et")
 			# ET (requires -et kernel on the host)
 			case ${benchmark} in
