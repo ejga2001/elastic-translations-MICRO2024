@@ -38,7 +38,7 @@ unset FRAG_TARGET
 unset MODE
 
 # Define the workloads to run
-export BENCHMARKS="astar omnetpp streamcluster hashjoin svm canneal"
+[ -z "${BENCHMARKS}" ] && export BENCHMARKS="astar omnetpp streamcluster hashjoin svm canneal"
 
 # Directory where results will be stored -- it's prefixed by
 # $(pwd)/results/host for native and $(pwd)/results/native for virtualized
