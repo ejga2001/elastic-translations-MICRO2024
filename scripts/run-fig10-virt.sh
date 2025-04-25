@@ -111,20 +111,11 @@ for benchmark in ${BENCHMARKS}; do
 	# Total VM memory
 	export MEM_GB=7
 	case "${RUN}" in
-		"baseline")
-			# Baseline
+		"thp")
+			# THP
 			unset MODE
-			export PGSZ="pte"
-			echo "Disabling THP..."
-      export HOST_THP=never
-      export GUEST_THP=never
 			KERNEL="5.18.19-et" spawnvm.sh run-fig10-virt.sh
 			;;
-	  "thp")
-      # THP
-      unset MODE
-      KERNEL="5.18.19-et" spawnvm.sh run-fig10-virt.sh
-      ;;
 		"et")
 			# ET (requires -et kernel on the host)
 			case ${benchmark} in
