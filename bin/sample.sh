@@ -93,7 +93,7 @@ sample() {
 }
 
 ok "Setting CPU frequency..."
-cpufreq-set -c 0 -f 2.7GHz || fail "Couldn't set CPU frequency..."
+cpufreq-set -c 0 -f 2.4GHz || fail "Couldn't set CPU frequency..."
 
 ok "Disabling THP..."
 echo never > /sys/kernel/mm/transparent_hugepage/enabled

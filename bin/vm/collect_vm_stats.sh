@@ -2,7 +2,7 @@
 
 i=0
 while true; do
-	until taskset -c 40 gparecv 2>/dev/null >> "./results/vm/${RESULTS}/gpadump"; do
+	until taskset -c 1 gparecv 2>/dev/null >> "./results/vm/${RESULTS}/gpadump"; do
 		sleep 10
 	done
 
@@ -13,8 +13,8 @@ while true; do
 
 	mv "./results/vm/${RESULTS}/gpadump" "./results/vm/${RESULTS}/gpadump-$$-$i"
 
-	taskset -c 36 sptecollect /sys/kernel/debug/kvm/*/sptdump "./results/vm/${RESULTS}/sptdump-$$-$i" &
-	taskset -c 35 pagecollect $(pgrep "qemu-") | tee "./results/vm/${RESULTS}/qemudump-$$-$i"
+	taskset -c 2 sptecollect /sys/kernel/debug/kvm/*/sptdump "./results/vm/${RESULTS}/sptdump-$$-$i" &
+	taskset -c 3 pagecollect $(pgrep "qemu-") | tee "./results/vm/${RESULTS}/qemudump-$$-$i"
 
 	i=$(( $i + 1 ));
 	sleep 10

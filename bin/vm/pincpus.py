@@ -38,9 +38,9 @@ def main(qmp, cpu_offset):
             threadid, cpu_offset + index))
         os.sched_setaffinity(threadid, { cpu_offset + index })
 
-        print("Pegging frequency to 2.7GHz for pcpu {}".format(index))
-        subprocess.run(cmd.format(governor="userspace", min_freq="2.7GHz",
-            max_freq="2.7GHz", cpu=cpu_offset + index).split(), check=True)
+        print("Pegging frequency to 2.4GHz for pcpu {}".format(index))
+        subprocess.run(cmd.format(governor="userspace", min_freq="2.4GHz",
+            max_freq="2.4GHz", cpu=cpu_offset + index).split(), check=True)
 
     signal.pause()
 

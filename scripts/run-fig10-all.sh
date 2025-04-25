@@ -5,5 +5,4 @@ MY_BENCHMARKS="astar omnetpp streamcluster hashjoin svm canneal xsbench bfs gups
 for BENCHMARKS in ${MY_BENCHMARKS}; do
   export BENCHMARKS
   ./scripts/run-fig10-virt.sh
-  systemctl daemon-reload
 done
