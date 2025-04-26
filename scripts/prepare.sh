@@ -15,7 +15,7 @@ install_packages() {
 		ripgrep libncurses-dev libssl-dev libelf-dev libunwind-dev strace \
 		inotify-tools numactl git vim libnuma-dev libzstd-dev ninja-build \
 		libaio-dev pkg-config libglib2.0-dev libpixman-1-dev libattr1-dev \
-	       	cpufrequtils libcap-ng-dev
+	       	cpufrequtils libcap-ng-dev libbabeltrace-ctf1 libbabeltrace-ctf-dev
 	apt -y purge flash-kernel
 	apt -y autoremove
 	apt -y autoclean

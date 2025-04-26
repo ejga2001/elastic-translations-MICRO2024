@@ -90,7 +90,7 @@ if [ "${TYPE}" == "vm" ]; then
     run.sh
   else
     # inside the VM we just use THP
-    run.sh
+    PGSZ="pte" run.sh
   fi
 	exit 0
 fi
@@ -111,8 +111,8 @@ for benchmark in ${BENCHMARKS}; do
 	# Total VM memory
 	export MEM_GB=7
 	case "${RUN}" in
-		"thp")
-			# THP
+		"baseline")
+			# 4KiB or THP
 			unset MODE
 			KERNEL="5.18.19-et" spawnvm.sh run-fig10-virt.sh
 			;;

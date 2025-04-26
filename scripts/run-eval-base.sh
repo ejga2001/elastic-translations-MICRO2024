@@ -54,10 +54,10 @@ export RESULTS="eval/frag${FRAG_TARGET:-0}"
 
 # Do 3 iterations per benchmark / scenario
 # FIXME: Set to 1 for now to finalize the scripts
-export ITER=1
+export ITER=${ITER:-1}
 
 # Use THP baseline config
-export PGSZ=thp
+export PGSZ=${PGSZ:-thp}
 
 # Disable verbose kernel logging (pr_debug()) for ET by default. Set these to
 # enable it. It requires the DEBUG_COALAPAGING / DEBUG_ET kernel config options
