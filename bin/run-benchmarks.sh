@@ -602,7 +602,7 @@ run() {
 	stats "${out}"
 
 	if [[ ! -z "${ETONLINE}" ]]; then
-		numactl -N0 -C1 -m0 epochs.sh "${benchmark}" 1024 5 "${out}.traces" &>> "${out}.leshy.out" &
+		numactl -N0 -m0 taskset -c 2 epochs.sh "${benchmark}" 1024 5 "${out}.traces" &>> "${out}.leshy.out" &
 		#numactl -N1 -m1 epochs.sh "${benchmark}" 1024 15 "${out}.traces" &>> "${out}.leshy.out" &
 	fi
 	

@@ -135,7 +135,7 @@ case "${RUN}" in
 		# KERNEL="et" ./scripts/build.sh
 		TASKSET_CORE=0 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="astar" run.sh &
 		TASKSET_CORE=1 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="btree" run.sh &
-		TASKSET_CORE=2 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="gups" run.sh &
+		TASKSET_CORE=3 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="gups" run.sh &
 		wait
 		;;
 esac
