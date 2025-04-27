@@ -17,7 +17,6 @@ from matplotlib.patches import Rectangle
 
 from collections import Counter
 from collections import OrderedDict
-
 from ctypes import *
 
 def make_rgb_transparent(rgb, bg_rgb, alpha):
@@ -35,7 +34,7 @@ def apply_label(ax, labels, h):
 		if rect.get_width() > 1:
 			continue
 		height = rect.get_height()
-		ax.text(rect.get_x() + rect.get_width() / 2, height + h, label, ha="center", va="bottom", color="black", rotation=90, fontsize=24, fontweight='semibold')
+		ax.text(rect.get_x() + rect.get_width() / 2, height+h, label, ha="center", va="bottom", color="black", rotation=90, fontsize=29, fontweight='semibold')
 
 def main():
 	plt.style.use('ggplot')
@@ -62,12 +61,11 @@ def main():
 
 	colors = {}
 	palete = sns.color_palette("Paired")
-	ours = make_rgb_transparent(palete[5], (1,1,1) , 0.8)
-	ours2 = make_rgb_transparent(palete[5], (1,1,1) , 0.4)
-	ours3 = make_rgb_transparent(palete[5], (1,1,1) , 0.2)
-	mthp1 = make_rgb_transparent(palete[6], (1,1,1) , 0.8)
-	mthp2 = make_rgb_transparent(palete[6], (1,1,1) , 0.6)
-
+	ours = make_rgb_transparent(palete[5], (1,1,1), 0.8)
+	ours2 = make_rgb_transparent(palete[5], (1,1,1), 0.4)
+	ours3 = make_rgb_transparent(palete[5], (1,1,1), 0.2)
+	mthp1 = make_rgb_transparent(palete[6], (1,1,1), 0.8)
+	mthp2 = make_rgb_transparent(palete[6], (1,1,1), 0.6)
 	colors["4KiB"] = palete[1]
 	colors["4KiB-v6.8"] = make_rgb_transparent(palete[1], (1,1,1), 0.8)
 	colors["THP"] = palete[7]
@@ -85,65 +83,58 @@ def main():
 	colors["2MiB"] = colors["THP"]
 	colors["32MiB"] = make_rgb_transparent(colors["2MiB"], (1,1,1), 0.3)
 
-	cols = ["4KiB", "THP", "mTHP", "Hawkeye", "ET", "ET-offline"]
+	cols = ["4KiB", "THP", "ET"]
 
-	# Speedup plots
+	# cycles
 	df = pd.read_csv("./cycles.csv", skipinitialspace=True, index_col=[0])
 	df.apply(pd.to_numeric)
-	df["THP"] = df["4KiB"]/df["THP"]
-	df["mTHP"] = df["4KiB"]/df["mTHP"]
-	df["Hawkeye"] = df["4KiB"]/df["Hawkeye"]
-	df["ET"] = df["4KiB"]/df["ET"]
-	df["ET-offline"] = df["4KiB"]/df["ET-offline"]
+	df["THP"] = df["4KiB"] / df["THP"]
+	df["ET"] = df["4KiB"] / df["ET"]
 
+	df.index = df.index.map(lambda x: eval(x)[1] if isinstance(x, str) and x.startswith("(") else x)
 	df.rename(index={"Streamcluster":"Streamcl", "Omnetpp":"Omnet"}, inplace=True)
 	df = df[cols]
 	df.drop('4KiB', axis=1, inplace=True)
 
 	f, ax = plt.subplots()
-	ax.set_ylim([0, 2.9])
+	ax.set_ylim([0, 3])
 
-	ax.add_patch(Rectangle((-1, 0), 3.5, 3.5, facecolor=(colors["64KiB"][0], colors["64KiB"][1], colors["64KiB"][2], 0.5), fill=True, lw=1))
-	ax.text(0.1, 2.9, "64KiB Friendly", fontsize=36, fontweight='semibold')
-	ax.add_patch(Rectangle((2.5, 0), 3, 3.5, facecolor=(colors["2MiB"][0], colors["2MiB"][1], colors["2MiB"][2], 0.35), fill=True, lw=1))
-	ax.text(3.3, 2.9, "2MiB Suff.", fontsize=36, fontweight='semibold')
-	ax.add_patch(Rectangle((5.5, 0), 5.5, 3, facecolor=(colors["32MiB"][0], colors["32MiB"][1], colors["32MiB"][2], 0.5), fill=True, lw=1))
-	ax.text(6.7, 2.9, "32MiB Ben.", fontsize=36, fontweight='semibold')
+	ax.add_patch(Rectangle((-1, 0), 2.5, 5, facecolor=(colors["64KiB"][0], colors["64KiB"][1], colors["64KiB"][2], 0.5), fill=True, lw=1))
+	ax.text(0, 3.1, "Mix1", fontsize=36, fontweight='semibold')
+	ax.add_patch(Rectangle((1.5, 0), 3, 5, facecolor=(colors["2MiB"][0], colors["2MiB"][1], colors["2MiB"][2], 0.35), fill=True, lw=1))
+	ax.text(2.6, 3.1, "Mix2", fontsize=36, fontweight='semibold')
+	ax.add_patch(Rectangle((4.5, 0), 5.5, 5, facecolor=(colors["32MiB"][0], colors["32MiB"][1], colors["32MiB"][2], 0.5), fill=True, lw=1))
+	ax.text(6.2, 3.1, "Mix3", fontsize=36, fontweight='semibold')
 
 	df.plot.bar(color=colors, ax=ax, legend=False, width=0.89, linewidth=3)
-	ax.set_xticklabels(labels=df.index, rotation=28, fontsize=36)
+	ax.set_xticklabels(labels=df.index, rotation=28, fontsize=38)
 	ax.set_ylabel("Speedup to 4KiB", fontsize=42)
 	patterns = ['', '//', 'x', '', '*']
 	apply_hatches(ax, len(df), patterns)
 
 	tags = (
-			[""] * 3  # Etiquetas vacías para los rectángulos de fondo
-			+ ["%.2f" % x for x in df['THP']]  # Valores de THP
-			+ ["%.2f" % x for x in df['mTHP']]  # Valores de mTHP
-			+ ["%.2f" % x for x in df['Hawkeye']]  # Valores de Hawkeye
-			+ ["%.2f" % x for x in df['ET']]  # Valores de ET
-			+ ["%.2f" % x for x in df['ET-offline']]  # Valores de ET-offline
+		[""] * 3  # Etiquetas vacías para los rectángulos de fondo
+		+ ["%.2f" % x for x in df['THP']]  # Valores de THP
+		+ ["%.2f" % x for x in df['ET']]  # Valores de ET
 	)
 	apply_label(ax, tags, 0.03)
 
 	handles, labels = plt.gca().get_legend_handles_labels()
-	order = [0, 1, 2, 3, 4]
+	order = [0, 1]
 	ax.legend([handles[idx] for idx in order], [labels[idx] for idx in order], loc='upper center', bbox_to_anchor=(0.48, -0.17), ncol=5, frameon=False, fancybox=False, shadow=False, fontsize=34)
+	f.savefig("fig14-speedup.pdf", bbox_inches='tight')
+	plt.savefig('fig14-speedup.png', bbox_inches='tight')
+	plt.savefig('fig14-speedup.eps', format='eps', bbox_inches='tight')
 
-	f.savefig("fig8-speedup-nofrag.pdf", bbox_inches='tight')
-	plt.savefig('fig8-speedup-nofrag.png', bbox_inches='tight')
-	plt.savefig('fig8-speedup-nofrag.eps', format='eps', bbox_inches='tight')
-
-	# TLB misses plots
+	# misses
 	df = pd.read_csv("./tlbmisses.csv", skipinitialspace=True, index_col=[0])
 	df.apply(pd.to_numeric)
 	df['THP'] = (df['4KiB'] - df['THP']).div(df['4KiB'], axis=0) * 100
-	df["mTHP"] = (df['4KiB'] - df['mTHP']).div(df['4KiB'], axis=0) * 100
-	df["Hawkeye"] = (df['4KiB'] - df['Hawkeye']).div(df['4KiB'], axis=0) * 100
 	df['ET'] = (df['4KiB'] - df['ET']).div(df['4KiB'], axis=0) * 100
-	df['ET-offline'] = (df['4KiB'] - df['ET-offline']).div(df['4KiB'], axis=0) * 100
 
+	df.index = df.index.map(lambda x: eval(x)[1] if isinstance(x, str) and x.startswith("(") else x)
 	df.rename(index={"Streamcluster":"Streamcl", "Omnetpp":"Omnet"}, inplace=True)
+	df = df[cols]
 	df.drop('4KiB', axis=1, inplace=True)
 
 	f, ax = plt.subplots()
@@ -152,33 +143,28 @@ def main():
 	ax.add_patch(Rectangle((-1, 0), 3.5, 200, facecolor=(colors["64KiB"][0], colors["64KiB"][1], colors["64KiB"][2], 0.5), fill=True, lw=1))
 	ax.add_patch(Rectangle((2.5, 0), 3, 200, facecolor=(colors["2MiB"][0], colors["2MiB"][1], colors["2MiB"][2], 0.35), fill=True, lw=1))
 	ax.add_patch(Rectangle((5.5, 0), 5.5, 200, facecolor=(colors["32MiB"][0], colors["32MiB"][1], colors["32MiB"][2], 0.5), fill=True, lw=1))
-	ax.text(0, 150, "64KiB Friendly", fontsize=36, fontweight='semibold')
-	ax.text(3.2, 150, "2MiB Suff.", fontsize=36, fontweight='semibold')
-	ax.text(6.6, 150, "32MiB Ben.", fontsize=36, fontweight='semibold')
+	ax.text(0.1, 150, "Mix1", fontsize=36, fontweight='semibold')
+	ax.text(3.3, 150, "Mix2", fontsize=36, fontweight='semibold')
+	ax.text(6.7, 150, "Mix3", fontsize=36, fontweight='semibold')
 
 	df.plot.bar(color=colors, ax=ax, legend=False, width=0.89, linewidth=3)
 	ax.set_xticklabels(labels=df.index, rotation=28, fontsize=36)
-	ax.set_ylabel("L2 TLB miss reduction (%)", fontsize=42)
-	patterns = ['', '//', 'x', '', '*']
+	ax.set_ylabel("L2 TLB miss reduction (%)", fontsize=37)
 	apply_hatches(ax, len(df), patterns)
 
 	tags = (
-			[""] * 3  # Etiquetas vacías para los rectángulos de fondo
-			+ ["%.2f" % x for x in df['THP']]  # Valores de THP
-			+ ["%.2f" % x for x in df['mTHP']]  # Valores de THP
-			+ ["%.2f" % x for x in df['Hawkeye']]  # Valores de Hawkeye
-			+ ["%.2f" % x for x in df['ET']]  # Valores de ET
-			+ ["%.2f" % x for x in df['ET-offline']]  # Valores de ET-offline
+		[""] * 3  # Etiquetas vacías para los rectángulos de fondo
+		+ ["%.2f" % x for x in df['THP']]  # Valores de THP
+		+ ["%.2f" % x for x in df['ET']]  # Valores de ET
 	)
 	apply_label(ax, tags, 1)
 
 	handles, labels = plt.gca().get_legend_handles_labels()
-	order = [0, 1, 2, 3, 4]
+	order = [0, 1]
 	ax.legend([handles[idx] for idx in order], [labels[idx] for idx in order], loc='upper center', bbox_to_anchor=(0.48, -0.17), ncol=5, frameon=False, fancybox=False, shadow=False, fontsize=34)
-
-	f.savefig("fig8-misses.pdf", bbox_inches='tight')
-	plt.savefig('fig8-misses.png', bbox_inches='tight')
-	plt.savefig('fig8-misses.eps', format='eps', bbox_inches='tight')
+	f.savefig("fig14-misses.pdf", bbox_inches='tight')
+	plt.savefig('fig14-misses.png', bbox_inches='tight')
+	plt.savefig('fig14-misses.eps', format='eps', bbox_inches='tight')
 
 if __name__ == "__main__":
 	main()

@@ -111,12 +111,12 @@ echo 0 > /proc/sys/kernel/randomize_va_space
 
 pushd ${BASE}/benchmarks
 
-sample bfs ./bfs -f ./fr.el -n 20
-sample gups ./gups 32
+sample bfs ./bfs -u 22 -n 20
+sample gups ./gups 1
 sample hashjoin ./hashjoin
-sample svm ./train ./kdd12
+sample svm ./train ./kddb-raw-libsvm
 sample btree ./BTree
-sample xsbench ./XSBench -s XL -t 1 -l 128
+sample xsbench ./XSBench -s small -t 1 -l 128
 sample canneal ./canneal 1 15000 2000 ./canneal.inp 6000
 sample ./astar ./BigLakes2048.cfg
 sample ./omnetpp ./omnetpp.ini

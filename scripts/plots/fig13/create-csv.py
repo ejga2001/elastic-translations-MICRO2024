@@ -40,8 +40,8 @@ def main():
         tlbmisses[bench] = []
 
         # base
-        if os.path.exists(BASE + f"/results/vm/fig10/{bench}.4KB.base.tcmalloc-norelease.nokcompactd.1000ms/1"):
-            with open(BASE + f"/results/vm/fig10/{bench}.4KB.base.tcmalloc-norelease.nokcompactd.1000ms/1", "r") as file:
+        if os.path.exists(BASE + f"/results/host/eval/{bench}.4KB.base.tcmalloc-norelease.nokcompactd.1000ms/1"):
+            with open(BASE + f"/results/host/eval/{bench}.4KB.base.tcmalloc-norelease.nokcompactd.1000ms/1", "r") as file:
                 for line in file.readlines():
                     if bench in ["omnetpp", "astar"]:
                         if "cycles" in line and "numactl" not in line:
@@ -57,8 +57,8 @@ def main():
             ptlbmisses[bench]["4KiB"] = tlbmisses[bench][-1]
 
         # THP
-        if os.path.exists(BASE + f"/results/vm/fig10/{bench}.4KB.thp.tcmalloc-norelease.nokcompactd.1000ms/1"):
-            with open(BASE + f"/results/vm/fig10/{bench}.4KB.thp.tcmalloc-norelease.nokcompactd.1000ms/1", "r") as file:
+        if os.path.exists(BASE + f"/results/host/eval/{bench}.4KB.thp.tcmalloc-norelease.nokcompactd.1000ms/1"):
+            with open(BASE + f"/results/host/eval/{bench}.4KB.thp.tcmalloc-norelease.nokcompactd.1000ms/1", "r") as file:
                 for line in file.readlines():
                     if bench in ["omnetpp", "astar"]:
                         if "cycles" in line and "numactl" not in line:
@@ -74,8 +74,8 @@ def main():
             ptlbmisses[bench]["THP"] = tlbmisses[bench][-1]
 
         # ET online
-        if os.path.exists(BASE + f"/results/vm/fig10/{bench}.4KB.thp.tcmalloc-norelease.etonline.nokcompactd.1000ms/1"):
-            with open(BASE + f"/results/vm/fig10/{bench}.4KB.thp.tcmalloc-norelease.etonline.nokcompactd.1000ms/1", "r") as file:
+        if os.path.exists(BASE + f"/results/host/eval/{bench}.4KB.thp.tcmalloc-norelease.etonline.nokcompactd.1000ms/1"):
+            with open(BASE + f"/results/host/eval/{bench}.4KB.thp.tcmalloc-norelease.etonline.nokcompactd.1000ms/1", "r") as file:
                 for line in file.readlines():
                     if bench in ["omnetpp", "astar"]:
                         if "cycles" in line and "numactl" not in line:
@@ -91,8 +91,8 @@ def main():
             ptlbmisses[bench]["ET"] = tlbmisses[bench][-1]
 
         # Hawkeye
-        if os.path.exists(BASE + f"/results/vm/fig10/{bench}.4KB.thp.tcmalloc-norelease.1s.hwk.nokcompactd.1000ms/1"):
-            with open(BASE + f"/results/vm/fig10/{bench}.4KB.thp.tcmalloc-norelease.1s.hwk.nokcompactd.1000ms/1", "r") as file:
+        if os.path.exists(BASE + f"/results/host/eval/{bench}.4KB.thp.tcmalloc-norelease.1s.hwk.nokcompactd.1000ms/1"):
+            with open(BASE + f"/results/host/eval/{bench}.4KB.thp.tcmalloc-norelease.1s.hwk.nokcompactd.1000ms/1", "r") as file:
                 for line in file.readlines():
                     if bench in ["omnetpp", "astar"]:
                         if "cycles" in line and "numactl" not in line:
