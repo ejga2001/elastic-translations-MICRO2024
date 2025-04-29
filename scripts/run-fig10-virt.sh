@@ -90,6 +90,7 @@ if [ "${TYPE}" == "vm" ]; then
     run.sh
   else
     # inside the VM we just use THP
+    PGSZ="thp" run.sh
     PGSZ="pte" run.sh
   fi
 	exit 0
