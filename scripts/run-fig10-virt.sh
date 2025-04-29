@@ -75,13 +75,13 @@ export ITER=1
 if [ "${TYPE}" == "vm" ]; then
 	if [[ ! -z "${MODE}" && "${MODE}" == "etheap" ]]; then
 		# inside the VM we use regular ET, i.e. with online Leshy
-		unset MODE
-		unset COALA_KHUGE
-		unset COALA_KHUGE_ETHEAP_ASYNC
+		#unset MODE
+		#unset COALA_KHUGE
+		#unset COALA_KHUGE_ETHEAP_ASYNC
 
-		export UNHINTED_FAULTS=1
-		export MODE="etonline"
-		run.sh
+		#export UNHINTED_FAULTS=1
+		#export MODE="etonline"
+		EXTRA=".async-32m" run.sh
 	elif [[ ! -z "${MODE}" && "${MODE}" == "hwk" ]]; then
     # inside the VM we use HawkEye
     unset MODE

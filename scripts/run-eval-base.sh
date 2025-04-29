@@ -103,7 +103,7 @@ case "${RUN}" in
 		# online == bin/epochs.sh, run by bin/run.sh
 		# profiling interval defined in bin/run.sh
 		# slack + target defined by bin/epochs.sh when spwaning leshyv3 to generate hints
-		UNHINTED_FAULTS=1 MODE="etonline" run.sh
+		#UNHINTED_FAULTS=1 MODE="etonline" run.sh
 
 		# (optional) ET with vanilla THP + khugepaged during init phase
 		#UNHINTED_FAULTS=1 MODE="etonline" COALA_KHUGE=1 EXTRA=".init-2m" run.sh
@@ -131,6 +131,8 @@ case "${RUN}" in
 		#MODE="etheap" EXTRA=".async-2m" run.sh
 
 		# FIXME: ET greedy runs with 32m async
+		export COALA_KHUGE_ETHEAP_ASYNC=1
+		MODE="etheap" EXTRA=".async-32m" run.sh
 		#echo 1 > /sys/module/coalapaging/parameters/khuge_etheap_async
 		#MODE="etheap" EXTRA=".async-32m" run.sh
 		#echo 0 > /sys/module/coalapaging/parameters/khuge_etheap_async

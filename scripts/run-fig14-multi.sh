@@ -99,6 +99,8 @@ export KHUGE=1 # enable khugepaged
 export KHUGE_SLEEP=1000 # 1ms khugepaged sleep / alloc interval
 export KHUGE_HWK=1 # enable the khugepaged aggressive scanning / sleep behavior from Hawkeye for everyone
 export NOKCOMPACTD=1 # Disable kcompactd noise (proactive compaction, etc.)
+export COALA_KHUGE=1
+export COALA_KHUGE_ETHEAP_ASYNC=1 # 32m migrations
 
 # Mix 1
 case "${RUN}" in
@@ -113,8 +115,8 @@ case "${RUN}" in
 		# ET
 		# Kernel Requirement: 5.18.19-et kernel
 		# KERNEL="et" ./scripts/build.sh
-		TASKSET_CORE=0 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="xsbench" run.sh &
-		TASKSET_CORE=1 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="hashjoin" run.sh &
+		TASKSET_CORE=0 MODE="etheap" EXTRA=".async-32m" BENCHMARKS="xsbench" run.sh &
+		TASKSET_CORE=1 MODE="etheap" EXTRA=".async-32m" BENCHMARKS="hashjoin" run.sh &
 		wait
 		;;
 esac
@@ -133,9 +135,9 @@ case "${RUN}" in
 		# ET
 		# Kernel Requirement: 5.18.19-et kernel
 		# KERNEL="et" ./scripts/build.sh
-		TASKSET_CORE=0 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="astar" run.sh &
-		TASKSET_CORE=1 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="btree" run.sh &
-		TASKSET_CORE=3 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="gups" run.sh &
+		TASKSET_CORE=0 MODE="etheap" EXTRA=".async-32m" BENCHMARKS="astar" run.sh &
+		TASKSET_CORE=1 MODE="etheap" EXTRA=".async-32m" BENCHMARKS="btree" run.sh &
+		TASKSET_CORE=3 MODE="etheap" EXTRA=".async-32m" BENCHMARKS="gups" run.sh &
 		wait
 		;;
 esac
@@ -155,10 +157,10 @@ case "${RUN}" in
 		# ET
 		# Kernel Requirement: 5.18.19-et kernel
 		# KERNEL="et" ./scripts/build.sh
-		TASKSET_CORE=0 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="omnetpp" run.sh &
-		TASKSET_CORE=1 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="svm" run.sh &
-		TASKSET_CORE=2 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="bfs" run.sh &
-		TASKSET_CORE=3 UNHINTED_FAULTS=1 MODE="etonline" BENCHMARKS="gups" run.sh &
+		TASKSET_CORE=0 MODE="etheap" EXTRA=".async-32m" BENCHMARKS="omnetpp" run.sh &
+		TASKSET_CORE=1 MODE="etheap" EXTRA=".async-32m" BENCHMARKS="svm" run.sh &
+		TASKSET_CORE=2 MODE="etheap" EXTRA=".async-32m" BENCHMARKS="bfs" run.sh &
+		TASKSET_CORE=3 MODE="etheap" EXTRA=".async-32m" BENCHMARKS="gups" run.sh &
 		wait
 		;;
 esac
