@@ -65,7 +65,7 @@ build_kernel() {
 	make -j$(nproc) Image.gz modules dtbs
 
 	ok "Building perf..."
-	make -j$(nproc) -C tools/perf WERROR=0 NO_LIBPERF
+	make -j$(nproc) -C tools/perf WERROR=0 NO_LIBPERF=1
 
 	popd
 }
