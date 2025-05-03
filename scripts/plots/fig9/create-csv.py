@@ -88,10 +88,10 @@ def main():
                     pages["Hawkeye"]["32MiB"] = int(line.split()[11])
                     break
 
-        # online
+        # ET greedy
         pages["ET"] = {}
-        if os.path.exists(BASE + "/results/host/eval/frag0/%s.4KB.thp.tcmalloc-norelease.etonline.nokcompactd.1000ms/1" % (bench)):
-            file = open(BASE + "/results/host/eval/frag0/%s.4KB.thp.tcmalloc-norelease.etonline.nokcompactd.1000ms/1" % (bench), "r+")
+        if os.path.exists(BASE + "/results/host/eval/frag0/%s.4KB.thp.tcmalloc-norelease.etheap.nokcompactd.1000ms.async-32m/1" % (bench)):
+            file = open(BASE + "/results/host/eval/frag0/%s.4KB.thp.tcmalloc-norelease.etheap.nokcompactd.1000ms.async-32m/1" % (bench), "r+")
             for line in file.readlines():
                 if "Anon 4K:" in line:
                     pages["ET"]["4KiB"] = int(line.split()[2])
@@ -100,7 +100,7 @@ def main():
                     pages["ET"]["32MiB"] = int(line.split()[11])
                     break
 
-        # offline
+        # ET offline
         pages["ET-Offline"] = {}
         if os.path.exists(BASE + "/results/host/eval/frag0/%s.4KB.thp.tcmalloc-norelease.leshy.nokcompactd.1000ms/1" % (bench)):
             file = open(BASE + "/results/host/eval/frag0/%s.4KB.thp.tcmalloc-norelease.leshy.nokcompactd.1000ms/1" % (bench), "r+")

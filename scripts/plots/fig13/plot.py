@@ -78,33 +78,28 @@ def main():
 	colors["ET-Leshy-offline"] = ours2
 	colors["ET-L-Off"] = ours2
 	colors["ET-offline"] = ours2
+	colors["ET-sample-offline"] = ours
+	colors["ET-access-offline"] = ours2
 
 	colors["64KiB"] = make_rgb_transparent(colors["4KiB"], (1,1,1), 0.3)
 	colors["2MiB"] = colors["THP"]
 	colors["32MiB"] = make_rgb_transparent(colors["2MiB"], (1,1,1), 0.3)
 
-	cols = ["4KiB", "THP", "Hawkeye", "ET"]
+	cols = ["4KiB", "THP", "ET-sample-offline", "ET-access-offline"]
 
 	# cycles
 	df = pd.read_csv("./cycles.csv", skipinitialspace=True, index_col=[0])
 	df.apply(pd.to_numeric)
 	df["THP"] = df["4KiB"] / df["THP"]
-	df["Hawkeye"] = df["4KiB"] / df["Hawkeye"]
-	df["ET"] = df["4KiB"] / df["ET"]
+	df["ET-sample-offline"] = df["4KiB"] / df["ET-sample-offline"]
+	df["ET-access-offline"] = df["4KiB"] / df["ET-access-offline"]
 
 	df.rename(index={"Streamcluster":"Streamcl", "Omnetpp":"Omnet"}, inplace=True)
 	df = df[cols]
 	df.drop('4KiB', axis=1, inplace=True)
 
 	f, ax = plt.subplots()
-	ax.set_ylim([0, 5])
-
-	ax.add_patch(Rectangle((-1, 0), 3.5, 5, facecolor=(colors["64KiB"][0], colors["64KiB"][1], colors["64KiB"][2], 0.5), fill=True, lw=1))
-	ax.text(0, 5.1, "64KiB Friendly", fontsize=36, fontweight='semibold')
-	ax.add_patch(Rectangle((2.5, 0), 3, 5, facecolor=(colors["2MiB"][0], colors["2MiB"][1], colors["2MiB"][2], 0.35), fill=True, lw=1))
-	ax.text(3.3, 5.1, "2MiB Suff.", fontsize=36, fontweight='semibold')
-	ax.add_patch(Rectangle((5.5, 0), 5.5, 5, facecolor=(colors["32MiB"][0], colors["32MiB"][1], colors["32MiB"][2], 0.5), fill=True, lw=1))
-	ax.text(7.3, 5.1, "32MiB Ben.", fontsize=36, fontweight='semibold')
+	ax.set_ylim([0, 2])
 
 	df.plot.bar(color=colors, ax=ax, legend=False, width=0.89, linewidth=3)
 	ax.set_xticklabels(labels=df.index, rotation=28, fontsize=38)
@@ -113,26 +108,25 @@ def main():
 	apply_hatches(ax, len(df), patterns)
 
 	tags = (
-		[""] * 3  # Etiquetas vacías para los rectángulos de fondo
-		+ ["%.2f" % x for x in df['THP']]  # Valores de THP
-		+ ["%.2f" % x for x in df['Hawkeye']]  # Valores de Hawkeye
-		+ ["%.2f" % x for x in df['ET']]  # Valores de ET
+		["%.2f" % x for x in df['THP']]  # Valores de THP
+		+ ["%.2f" % x for x in df['ET-sample-offline']]  # Valores de ET-sample-offline
+		+ ["%.2f" % x for x in df['ET-access-offline']]  # Valores de ET-access-offline
 	)
 	apply_label(ax, tags, 0.03)
 
 	handles, labels = plt.gca().get_legend_handles_labels()
 	order = [0, 1, 2]
 	ax.legend([handles[idx] for idx in order], [labels[idx] for idx in order], loc='upper center', bbox_to_anchor=(0.48, -0.17), ncol=5, frameon=False, fancybox=False, shadow=False, fontsize=34)
-	f.savefig("fig10-speedup.pdf", bbox_inches='tight')
-	plt.savefig('fig10-speedup.png', bbox_inches='tight')
-	plt.savefig('fig10-speedup.eps', format='eps', bbox_inches='tight')
+	f.savefig("fig13-speedup.pdf", bbox_inches='tight')
+	plt.savefig('fig13-speedup.png', bbox_inches='tight')
+	plt.savefig('fig13-speedup.eps', format='eps', bbox_inches='tight')
 
 	# misses
 	df = pd.read_csv("./tlbmisses.csv", skipinitialspace=True, index_col=[0])
 	df.apply(pd.to_numeric)
 	df['THP'] = (df['4KiB'] - df['THP']).div(df['4KiB'], axis=0) * 100
-	df['Hawkeye'] = (df['4KiB'] - df['Hawkeye']).div(df['4KiB'], axis=0) * 100
-	df['ET'] = (df['4KiB'] - df['ET']).div(df['4KiB'], axis=0) * 100
+	df['ET-sample-offline'] = (df['4KiB'] - df['ET-sample-offline']).div(df['4KiB'], axis=0) * 100
+	df['ET-access-offline'] = (df['4KiB'] - df['ET-access-offline']).div(df['4KiB'], axis=0) * 100
 
 	df.rename(index={"Streamcluster":"Streamcl", "Omnetpp":"Omnet"}, inplace=True)
 	df = df[cols]
@@ -140,13 +134,6 @@ def main():
 
 	f, ax = plt.subplots()
 	ax.set_ylim([0, 150])
-
-	ax.add_patch(Rectangle((-1, 0), 3.5, 200, facecolor=(colors["64KiB"][0], colors["64KiB"][1], colors["64KiB"][2], 0.5), fill=True, lw=1))
-	ax.add_patch(Rectangle((2.5, 0), 3, 200, facecolor=(colors["2MiB"][0], colors["2MiB"][1], colors["2MiB"][2], 0.35), fill=True, lw=1))
-	ax.add_patch(Rectangle((5.5, 0), 5.5, 200, facecolor=(colors["32MiB"][0], colors["32MiB"][1], colors["32MiB"][2], 0.5), fill=True, lw=1))
-	ax.text(0.1, 150, "64KiB Friendly", fontsize=36, fontweight='semibold')
-	ax.text(3.3, 150, "2MiB Suff.", fontsize=36, fontweight='semibold')
-	ax.text(6.7, 150, "32MiB Ben.", fontsize=36, fontweight='semibold')
 
 	df.plot.bar(color=colors, ax=ax, legend=False, width=0.89, linewidth=3)
 	ax.set_xticklabels(labels=df.index, rotation=28, fontsize=36)
@@ -156,17 +143,17 @@ def main():
 	tags = (
 		[""] * 3  # Etiquetas vacías para los rectángulos de fondo
 		+ ["%.2f" % x for x in df['THP']]  # Valores de THP
-		+ ["%.2f" % x for x in df['Hawkeye']]  # Valores de Hawkeye
-		+ ["%.2f" % x for x in df['ET']]  # Valores de ET
+		+ ["%.2f" % x for x in df['ET-sample-offline']]  # Valores de ET-sample-offline
+		+ ["%.2f" % x for x in df['ET-access-offline']]  # Valores de ET-access-offline
 	)
 	apply_label(ax, tags, 1)
 
 	handles, labels = plt.gca().get_legend_handles_labels()
 	order = [0, 1, 2]
 	ax.legend([handles[idx] for idx in order], [labels[idx] for idx in order], loc='upper center', bbox_to_anchor=(0.48, -0.17), ncol=5, frameon=False, fancybox=False, shadow=False, fontsize=34)
-	f.savefig("fig10-misses.pdf", bbox_inches='tight')
-	plt.savefig('fig10-misses.png', bbox_inches='tight')
-	plt.savefig('fig10-misses.eps', format='eps', bbox_inches='tight')
+	f.savefig("fig13-misses.pdf", bbox_inches='tight')
+	plt.savefig('fig13-misses.png', bbox_inches='tight')
+	plt.savefig('fig13-misses.eps', format='eps', bbox_inches='tight')
 
 if __name__ == "__main__":
 	main()

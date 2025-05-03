@@ -110,8 +110,8 @@ def main():
             ptlbmisses[bench]["Hawkeye"] = tlbmisses[bench][-1]
 
         #online
-        if os.path.exists(BASE + "/results/host/eval/frag0/%s.4KB.thp.tcmalloc-norelease.etonline.nokcompactd.1000ms/1"%(bench)):
-            file = open(BASE + "/results/host/eval/frag0/%s.4KB.thp.tcmalloc-norelease.etonline.nokcompactd.1000ms/1"%( bench),"r+")
+        if os.path.exists(BASE + "/results/host/eval/frag0/%s.4KB.thp.tcmalloc-norelease.etheap.nokcompactd.1000ms.async-32m/1"%(bench)):
+            file = open(BASE + "/results/host/eval/frag0/%s.4KB.thp.tcmalloc-norelease.etheap.nokcompactd.1000ms.async-32m/1"%( bench),"r+")
             for line in file.readlines():
                 if bench in ["omnetpp", "astar"]:
                     if "cycles" in line and "numactl" not in line:

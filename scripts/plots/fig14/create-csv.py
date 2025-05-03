@@ -78,9 +78,9 @@ def main():
                     pcycles[(idx, bench)]["THP"] = cycles[bench][-1]
                     ptlbmisses[(idx, bench)]["THP"] = tlbmisses[bench][-1]
 
-            # ET online
-            if os.path.exists(BASE + f"/results/host/multi/{bench}.4KB.thp.tcmalloc-norelease.etonline.nokcompactd.1000ms/1"):
-                with open(BASE + f"/results/host/multi/{bench}.4KB.thp.tcmalloc-norelease.etonline.nokcompactd.1000ms/1", "r") as file:
+            # ET greedy
+            if os.path.exists(BASE + f"/results/host/multi/{bench}.4KB.thp.tcmalloc-norelease.etheap.nokcompactd.1000ms.async-32m/1"):
+                with open(BASE + f"/results/host/multi/{bench}.4KB.thp.tcmalloc-norelease.etheap.nokcompactd.1000ms.async-32m/1", "r") as file:
                     for line in file.readlines():
                         if bench in ["omnetpp", "astar"]:
                             if "cycles" in line and "numactl" not in line:
